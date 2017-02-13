@@ -1,4 +1,4 @@
-# Gofield
+# Gofield [![Build Status](https://travis-ci.org/enrichman/gofield.svg?branch=master)](https://travis-ci.org/enrichman/gofield)
 
 Gofield will reduce your JSON serialized Go struct in a lighter object to keep your client happy!
 
