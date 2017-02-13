@@ -28,7 +28,9 @@ func reduceHandler(w http.ResponseWriter, r *http.Request) {
 	case err != nil:
 		panic(err)
 	}
-	defer r.Body.Close()
+	defer func() {
+		_ = r.Body.Close()
+	}()
 
 	log.Println("Received:", obj)
 
@@ -37,10 +39,10 @@ func reduceHandler(w http.ResponseWriter, r *http.Request) {
 	fields := r.URL.Query().Get("fields")
 	if fields == "" {
 		log.Println("Missing fields")
-		json.NewEncoder(w).Encode(obj)
+		_ = json.NewEncoder(w).Encode(obj)
 
 	} else {
 		log.Println("Received fields", fields)
-		json.NewEncoder(w).Encode(gofield.Reduce(obj, fields))
+		_ = json.NewEncoder(w).Encode(gofield.Reduce(obj, fields))
 	}
 }
